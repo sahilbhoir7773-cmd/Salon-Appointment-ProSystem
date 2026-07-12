@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2>{{ salon.salon_name }}</h2>
+
+{% for service in services %}
+
+<div class="card mb-3">
+
+<div class="card-body">
+
+<h4>{{ service.service_name }}</h4>
+
+<p>₹ {{ service.price }}</p>
+
+<p>{{ service.duration }} Minutes</p>
+
+<p>{{ service.description }}</p>
+
+<a
+href="{{ url_for('booking.book', service_id=service.id) }}"
+class="btn btn-success">
+
+Book Now
+
+</a>
+
+</div>
+
+</div>
+
+{% else %}
+
+<p>No services available.</p>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

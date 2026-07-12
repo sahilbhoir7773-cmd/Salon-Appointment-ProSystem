@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Booking History{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4 text-center">My Booking History</h2>
+
+    {% if bookings %}
+
+    <table class="table table-bordered table-striped text-center">
+
+        <thead class="table-dark">
+            <tr>
+                <th>Service</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for booking in bookings %}
+
+            <tr>
+
+                <td>{{ booking.service.service_name }}</td>
+
+                <td>{{ booking.booking_date }}</td>
+
+                <td>{{ booking.booking_time }}</td>
+
+                <td>
+
+                    {% if booking.status == "Pending" %}
+
+                        <span class="badge bg-warning text-dark">
+                            Pending
+                        </span>
+
+                    {% elif booking.status == "Accepted" %}
+
+                        <span class="badge bg-primary">
+                            Accepted
+                        </span>
+
+                    {% elif booking.status == "Completed" %}
+
+                        <span class="badge bg-success">
+                            Completed
+                        </span>
+
+                    {% elif booking.status == "Rejected" %}
+
+                        <span class="badge bg-danger">
+                            Rejected
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge bg-secondary">
+                            {{ booking.status }}
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+
+                    {% if booking.status == "Pending" %}
+
+                        <a href="{{ url_for('booking.cancel_booking', id=booking.id) }}"
+                           class="btn btn-danger btn-sm">
+                            Cancel
+                        </a>
+
+                    {% elif booking.status == "Completed" %}
+
+                        <a href="{{ url_for('review.add_review', booking_id=booking.id) }}"
+                           class="btn btn-success btn-sm">
+                            Write Review
+                        </a>
+
+                    {% else %}
+
+                        <span class="text-muted">
+                            No Action
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% else %}
+
+        <div class="alert alert-info text-center">
+            No bookings found.
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

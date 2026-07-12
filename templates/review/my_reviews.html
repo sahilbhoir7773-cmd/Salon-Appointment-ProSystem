@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}My Reviews{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="mb-4 text-center">
+
+My Reviews
+
+</h2>
+
+<table class="table table-bordered table-hover">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>Salon</th>
+
+<th>Rating</th>
+
+<th>Comment</th>
+
+<th>Date</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for review in reviews %}
+
+<tr>
+
+<td>{{ review.salon.salon_name }}</td>
+
+<td>{{ review.rating }}/5 ⭐</td>
+
+<td>{{ review.comment }}</td>
+
+<td>{{ review.created_at.strftime("%d-%m-%Y") }}</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

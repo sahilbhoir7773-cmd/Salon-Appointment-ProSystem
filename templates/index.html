@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+
+{% block title %}Salon Booking Pro{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero bg-dark text-white text-center py-5">
+
+    <div class="container">
+
+        <h1 class="display-4 fw-bold">
+            Welcome to Salon Booking Pro
+        </h1>
+
+        <p class="lead mt-3">
+            Book your salon appointment anytime, anywhere.
+        </p>
+
+        {% if current_user.is_authenticated %}
+
+            <a href="{{ url_for('customer.dashboard') }}"
+               class="btn btn-warning btn-lg mt-3">
+                Book Appointment
+            </a>
+
+        {% else %}
+
+            <a href="{{ url_for('auth.login') }}"
+               class="btn btn-warning btn-lg mt-3">
+                Login to Book
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+<!-- About Salon -->
+<section class="container py-5">
+
+    <div class="row align-items-center">
+
+        <div class="col-md-6">
+
+            <img src="{{ url_for('static', filename='images/salon.jpg') }}"
+                 class="img-fluid rounded shadow">
+
+        </div>
+
+        <div class="col-md-6">
+
+            <h2>About Our Salon</h2>
+
+            <p class="mt-3">
+
+                Welcome to Salon Booking Pro.
+
+                We provide premium salon services with experienced
+                professionals using high-quality products.
+
+            </p>
+
+            <ul>
+
+                <li>Professional Hair Cut</li>
+                <li>Hair Spa</li>
+                <li>Facial</li>
+                <li>Hair Coloring</li>
+                <li>Beard Styling</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Services -->
+<section class="container py-5">
+
+    <h2 class="text-center mb-5">
+
+        Our Services
+
+    </h2>
+
+    <div class="row">
+
+        {% for service in services %}
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h4>{{ service.service_name }}</h4>
+
+                    <p>{{ service.description }}</p>
+
+                    <h5 class="text-success">
+
+                        ₹{{ service.price }}
+
+                    </h5>
+
+                    <p>
+
+                        Duration :
+                        {{ service.duration }} Minutes
+
+                    </p>
+
+                    {% if current_user.is_authenticated %}
+
+                        <a href="{{ url_for('booking.book', service_id=service.id) }}"
+                           class="btn btn-warning">
+
+                            Book Now
+
+                        </a>
+
+                    {% else %}
+
+                        <a href="{{ url_for('auth.login') }}"
+                           class="btn btn-dark">
+
+                            Login to Book
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- Customer Reviews -->
+<section class="bg-light py-5">
+
+    <div class="container">
+
+        <h2 class="text-center mb-5">
+
+            Customer Reviews
+
+        </h2>
+
+        <div class="row">
+
+            {% for review in reviews %}
+
+            <div class="col-md-4 mb-4">
+
+                <div class="card shadow h-100">
+
+                    <div class="card-body">
+
+                        <h5>
+
+                            {{ review.customer.full_name }}
+
+                        </h5>
+
+                        <p class="text-warning">
+
+                            {% for i in range(review.rating) %}
+                                ⭐
+                            {% endfor %}
+
+                        </p>
+
+                        <p>
+
+                            "{{ review.comment }}"
+
+                        </p>
+
+                        <small class="text-muted">
+
+                           {{ review.salon.salon_name }}
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% else %}
+
+            <div class="col-12 text-center">
+
+                <p>No reviews available yet.</p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Why Choose Us -->
+<section class="container py-5">
+
+    <h2 class="text-center mb-5">
+
+        Why Choose Us?
+
+    </h2>
+
+    <div class="row text-center">
+
+        <div class="col-md-4">
+
+            <h3>⭐ Expert Staff</h3>
+
+            <p>
+                Experienced salon professionals.
+            </p>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <h3>💯 Premium Products</h3>
+
+            <p>
+                We use only branded salon products.
+            </p>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <h3>📅 Easy Booking</h3>
+
+            <p>
+                Book appointments in just a few clicks.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Contact -->
+<section class="container py-5">
+
+    <h2 class="text-center mb-5">
+
+        Contact Us
+
+    </h2>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <h4>Salon Address</h4>
+
+            <p>Karjat, Maharashtra</p>
+
+            <p>📞 +91 7774066763</p>
+
+            <p>✉ salonbooking@gmail.com</p>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <iframe
+                src="https://www.google.com/maps?q=Karjat&output=embed"
+                width="100%"
+                height="300"
+                style="border:0;"
+                loading="lazy">
+            </iframe>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}Owner Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Owner Dashboard</h2>
+
+        <div>
+            <a href="{{ url_for('owner.add_salon') }}" class="btn btn-success">
+                + Add Salon
+            </a>
+
+            <a href="{{ url_for('service.add_service') }}" class="btn btn-primary">
+                + Add Service
+            </a>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="row">
+
+        <div class="col-md-4 mb-3">
+            <div class="card shadow text-center">
+                <div class="card-body">
+                    <h5>Total Services</h5>
+                    <h2>{{ services|length }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card shadow text-center">
+                <div class="card-body">
+                    <h5>Total Bookings</h5>
+                    <h2>{{ bookings|length }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card shadow text-center">
+                <div class="card-body">
+                    <h5>Total Reviews</h5>
+                    <h2>{{ reviews|length }}</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mb-4">
+
+        <a href="{{ url_for('owner.bookings') }}"
+           class="btn btn-warning">
+            View Bookings
+        </a>
+
+        <a href="{{ url_for('owner.reviews') }}"
+           class="btn btn-info">
+            View Reviews
+        </a>
+
+    </div>
+
+    <hr>
+
+    <h3>Your Services</h3>
+
+    {% if services %}
+
+    <table class="table table-bordered table-hover mt-3">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+                <th>Service</th>
+                <th>Price</th>
+                <th>Duration</th>
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for service in services %}
+
+            <tr>
+
+                <td>{{ service.id }}</td>
+
+                <td>{{ service.service_name }}</td>
+
+                <td>₹{{ service.price }}</td>
+
+                <td>{{ service.duration }} mins</td>
+
+                <td>
+
+                    <a href="{{ url_for('service.edit_service', id=service.id) }}"
+                       class="btn btn-sm btn-primary">
+                        Edit
+                    </a>
+
+                    <a href="{{ url_for('service.delete_service', id=service.id) }}"
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Delete this service?')">
+                        Delete
+                    </a>
+
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% else %}
+
+        <div class="alert alert-warning">
+
+            No services found.
+
+            <br><br>
+
+            <a href="{{ url_for('service.add_service') }}"
+               class="btn btn-success">
+
+                Add Your First Service
+
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

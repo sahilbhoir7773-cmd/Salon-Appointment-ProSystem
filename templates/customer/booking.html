@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Book Appointment</h2>
+
+<h3>{{ service.service_name }}</h3>
+
+<p>Price : ₹{{ service.price }}</p>
+
+<form method="POST">
+
+    <label>Date</label>
+
+    <input
+        type="date"
+        name="date"
+        required>
+
+    <br><br>
+
+    <label>Time</label>
+
+    <input
+        type="time"
+        name="time"
+        required>
+
+    <br><br>
+
+    <button type="submit">
+
+        Book Now
+
+    </button>
+
+</form>
+
+<a href="{{ url_for('booking.services', salon_id=salon.id) }}"
+class="btn btn-primary">
+
+View Services
+
+</a>
+
+{% endblock %}

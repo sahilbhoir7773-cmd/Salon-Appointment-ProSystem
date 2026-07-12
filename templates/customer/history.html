@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Customer Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Customer Dashboard</h2>
+
+    <!-- Search Form -->
+    <form method="GET" class="mb-3">
+
+        <div class="input-group">
+
+            <input
+                type="text"
+                name="search"
+                class="form-control"
+                placeholder="Search service..."
+                value="{{ search }}">
+
+            <button class="btn btn-dark">
+                Search
+            </button>
+
+        </div>
+
+    </form>
+
+    <!-- Buttons -->
+    <div class="mb-4">
+
+        <a href="{{ url_for('customer.history') }}"
+           class="btn btn-primary">
+            Booking History
+        </a>
+
+    </div>
+
+    <!-- Services -->
+    <div class="row">
+
+        {% for service in services %}
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card h-100 shadow">
+
+                <div class="card-body">
+
+                    <h4>{{ service.service_name }}</h4>
+
+                    <p>{{ service.description }}</p>
+
+                    <h5>₹{{ service.price }}</h5>
+
+                    <p>{{ service.duration }} Minutes</p>
+
+                    <a href="{{ url_for('booking.book', service_id=service.id) }}"
+                       class="btn btn-warning">
+                        Book Now
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

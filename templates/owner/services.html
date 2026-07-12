@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Services{% endblock %}
+
+{% block content %}
+
+<h2>{{ salon.salon_name }} - Services</h2>
+
+<a href="{{ url_for('owner.add_service') }}"
+class="btn btn-success mb-3">
+
+Add Service
+
+</a>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Name</th>
+
+<th>Price</th>
+
+<th>Duration</th>
+
+<th>Action</th>
+
+</tr>
+
+{% for service in services %}
+
+<tr>
+
+<td>{{ service.service_name }}</td>
+
+<td>₹{{ service.price }}</td>
+
+<td>{{ service.duration }} min</td>
+
+<td>
+
+<a href="{{ url_for('owner.edit_service', id=service.id) }}"
+class="btn btn-warning btn-sm">
+
+Edit
+
+</a>
+
+<a href="{{ url_for('owner.delete_service', id=service.id) }}"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Delete this service?')">
+
+Delete
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

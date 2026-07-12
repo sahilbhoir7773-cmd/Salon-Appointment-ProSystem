@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Welcome</h1>
+
+<h2>Available Salons</h2>
+
+{% for salon in salons %}
+
+<p>
+
+<a href="/customer/salon/{{ salon.id }}">
+
+{{ salon.salon_name }}
+
+</a>
+
+</p>
+
+{% endfor %}
+
+{% endblock %}

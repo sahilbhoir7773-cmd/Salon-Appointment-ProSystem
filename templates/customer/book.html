@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2>Book Appointment</h2>
+
+<h4>{{ service.service_name }}</h4>
+
+<p>Price : ₹ {{ service.price }}</p>
+
+<form method="POST">
+
+<div class="mb-3">
+
+<label>Select Date</label>
+
+<input
+type="date"
+name="booking_date"
+class="form-control"
+min = "{{ today }}"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label>Select Time</label>
+
+<input
+type="time"
+name="booking_time"
+class="form-control"
+required>
+
+</div>
+
+<button
+class="btn btn-primary">
+
+Confirm Booking
+
+</button>
+
+</form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>All Salons</h1>
+
+{% for salon in salons %}
+
+<div>
+
+<h3>{{ salon.salon_name }}</h3>
+
+<p>{{ salon.city }}</p>
+
+<a href="/customer/salon/{{ salon.id }}">
+
+View Details
+
+</a>
+
+</div>
+
+<hr>
+
+{% endfor %}
+
+{% endblock %}

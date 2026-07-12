@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>
+
+{{ salon.salon_name }}
+
+</h2>
+
+<p>
+
+{{ salon.address }}
+
+</p>
+
+<p>
+
+{{ salon.city }}
+
+</p>
+
+<p>
+
+{{ salon.phone }}
+
+</p>
+
+<p>
+
+{{ salon.description }}
+
+</p>
+
+<h3>
+
+Services
+
+</h3>
+
+<ul>
+
+{% for service in salon.services %}
+
+<li>
+
+{{ service.service_name }}
+
+- ₹{{ service.price }}
+
+- {{ service.duration }} min
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% endblock %}

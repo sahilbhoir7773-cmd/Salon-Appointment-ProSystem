@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}Owner Bookings{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">All Bookings</h2>
+
+    {% if bookings %}
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Service</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for booking in bookings %}
+
+        <tr>
+
+            <td>{{ booking.id }}</td>
+
+            <td>{{ booking.customer.full_name }}</td>
+
+            <td>{{ booking.service.service_name }}</td>
+
+            <td>{{ booking.booking_date }}</td>
+
+            <td>{{ booking.booking_time }}</td>
+
+            <td>
+
+                {% if booking.status == "Pending" %}
+                    <span class="badge bg-warning text-dark">
+                        Pending
+                    </span>
+
+                {% elif booking.status == "Approved" %}
+                    <span class="badge bg-primary">
+                        Approved
+                    </span>
+
+                {% elif booking.status == "Completed" %}
+                    <span class="badge bg-success">
+                        Completed
+                    </span>
+
+                {% elif booking.status == "Cancelled" %}
+                    <span class="badge bg-danger">
+                        Cancelled
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                {% if booking.status == "Pending" %}
+
+                    <a href="{{ url_for('owner.approve_booking', id=booking.id) }}"
+                       class="btn btn-primary btn-sm">
+                        Approve
+                    </a>
+
+                {% elif booking.status == "Approved" %}
+
+                    <a href="{{ url_for('owner.complete_booking', id=booking.id) }}"
+                       class="btn btn-success btn-sm">
+                        Complete
+                    </a>
+
+                {% elif booking.status == "Completed" %}
+
+                    <span class="text-success fw-bold">
+                        Completed
+                    </span>
+
+                {% elif booking.status == "Cancelled" %}
+
+                    <span class="text-danger fw-bold">
+                        Cancelled
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% else %}
+
+    <div class="alert alert-warning text-center">
+
+        No bookings found.
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

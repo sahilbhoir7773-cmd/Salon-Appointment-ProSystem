@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Salon Reviews{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="text-center mb-4">
+
+Customer Reviews
+
+</h2>
+
+{% for review in reviews %}
+
+<div class="card mb-3 shadow">
+
+<div class="card-body">
+
+<h5>
+
+{{ review.customer.full_name }}
+
+</h5>
+
+<p>
+
+Rating :
+<strong>{{ review.rating }}/5 ⭐</strong>
+
+</p>
+
+<p>
+
+{{ review.comment }}
+
+</p>
+
+<small class="text-muted">
+
+{{ review.created_at.strftime("%d %B %Y") }}
+
+</small>
+
+</div>
+
+</div>
+
+{% else %}
+
+<div class="alert alert-info">
+
+No Reviews Yet.
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

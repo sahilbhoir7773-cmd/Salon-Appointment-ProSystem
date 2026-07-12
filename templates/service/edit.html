@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Service{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h3 class="text-center">
+
+                        Edit Service
+
+                    </h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form method="POST">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Service Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="service_name"
+                                value="{{ service.service_name }}"
+                                class="form-control"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Price
+                            </label>
+
+                            <input
+                                type="number"
+                                name="price"
+                                value="{{ service.price }}"
+                                class="form-control"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Duration
+                            </label>
+
+                            <input
+                                type="number"
+                                name="duration"
+                                value="{{ service.duration }}"
+                                class="form-control"
+                                required>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-100">
+
+                            Update Service
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

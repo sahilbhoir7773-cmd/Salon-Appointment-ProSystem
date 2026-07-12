@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Appointments{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">Appointments</h2>
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>Customer</th>
+                <th>Service</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for booking in bookings %}
+
+            <tr>
+
+                <td>{{ booking.customer.full_name }}</td>
+
+                <td>{{ booking.service.service_name }}</td>
+
+                <td>{{ booking.booking_date }}</td>
+
+                <td>{{ booking.booking_time }}</td>
+
+                <td>{{ booking.status }}</td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

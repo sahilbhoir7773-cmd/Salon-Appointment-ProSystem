@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Customer Reviews{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="mb-4">Customer Reviews</h2>
+
+{% if reviews %}
+
+<table class="table table-bordered table-striped">
+
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for review in reviews %}
+
+    <tr>
+
+        <td>{{ review.id }}</td>
+
+        <td>{{ review.customer.full_name }}</td>
+
+        <td>
+
+            {% for i in range(review.rating) %}
+                ⭐
+            {% endfor %}
+
+        </td>
+
+        <td>{{ review.comment }}</td>
+
+        <td>{{ review.created_at.strftime("%d-%m-%Y") }}</td>
+
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% else %}
+
+<div class="alert alert-warning">
+No reviews yet.
+</div>
+
+{% endif %}
+
+</div>
+
+{% endblock %}
