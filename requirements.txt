@@ -4,5 +4,6 @@ Flask-Login
 Flask-Bcrypt
 Flask-Migrate
 google-generativeai
-python-dotenv 
+python-dotenv
 Flask-Mail
+gunicorn
